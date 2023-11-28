@@ -39,3 +39,18 @@ Parcel
 JSX
 
 JSX is a JavaScript syntax which is easier to create react elements otherwise it we have to use React.createElement("",{},"") to create an element.
+
+------------------------------------------------------------------------------------------------------------------------------------
+Reconciliationn Algorithm or React Fiber
+
+-Whenever we have a UI, react creates a virtual DOM of it.
+
+Virtual DOM 
+
+-Virtual DOM is not an actual DOM.
+-Virtual DOM is a representation of actual DOM.
+-Virtual DOM is basically an object/react Elements.
+
+Diff Algorithm
+
+-It finds out the difference between two virtual DOM's updated virtual DOM & previous virtual DOM.
