@@ -1,45 +1,52 @@
+    import React from "react";
+    import ReactDOM from"react-dom/client";
+    import Header from "./components/Header";
+    import Body from "./components/Body";
+    import { createBrowserRouter, RouterProvider } from "react-router-dom";
+    import About from "./components/About";
+    import Contact from "./components/Contact";
+    import Error from "./components/Error";
+    import { Outlet } from "react-router-dom";
+    import RestaurantMenu from "./components/RestaurantMenu";
+
+  
+    
+    const AppLayout = () => {
+        return (
+            <div className="app">
+                <Header/>
+                <Outlet/>
+            </div>
+        );
+    };
+    
+    const appRouter = createBrowserRouter([
+        {
+            path:'/',
+            element: <AppLayout/>,
+            children: [
+                {
+                    path:'/',
+                    element: <Body/>,
+                },
+                {
+                    path:'/about',
+                    element: <About/>,
+                },
+                {
+                    path:'/contact',
+                    element: <Contact/>,
+                },
+                {
+                    path:'/restaurants/:resId',
+                    element: <RestaurantMenu/>,
+                }
+            ],
+            errorElement:<Error/>,
+        },
+    ])
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
-
-
-
-// const heading = React.createElement(
-//     "h1",
-//     {id:'heading'},
-//     "Hello World from React !!"
-//     );
-
-//     console.log(heading); //object
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// root.render(heading);
-
-// React.createElement() does not creates a tag, it creates a React Element thta is object.
-// it has props, props are children and attributes that we are passing
-// "Hello World from React !!" is the children which will go inside h1 tag
-// {id:'heading'} is the attributes
-// h1 is not an tag it is an React Object
-// render method is responsible to take the object and convert it into the tag and put it uopn the DOM
-
-
-// const parent = React.createElement(
-//     "h1",
-//     {id:'parent'},
-//     React.createElement("div",{id:"child"},[React.createElement("h1", {}, "i am h1 tag"),React.createElement("h2", {}, "i am h2 tag")])
-// );
-
-// console.log(parent); //object
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// root.render(parent);
-
-const parent = React.createElement(
-    "h1",
-    {id:'parent'},
-    React.createElement("div",{id:"child"},[React.createElement("h1", {}, "i am h1 tag"),React.createElement("h2", {}, "i am h2 tag")])
-);
-
-console.log(parent); //object
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(parent);
+    root.render(<RouterProvider router={appRouter}/>);
