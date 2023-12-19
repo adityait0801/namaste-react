@@ -3,6 +3,7 @@ import resList from "../utils/mockDemo";
 import {useState, useEffect} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
     const Body = () =>{
         const [listOfRestaurants,setListOfRestaurants] = useState([]);
@@ -10,6 +11,8 @@ import { Link } from "react-router-dom";
         const [searchText, setSearchText] = useState("");
 
         const [filteredRestaurants,setFilteredRestaurants] = useState([]);
+
+        const onlineStatus = useOnlineStatus();
 
         useEffect( ()=>{
             fetchData()
@@ -28,6 +31,13 @@ import { Link } from "react-router-dom";
         if (listOfRestaurants?.length === 0)
         return <Shimmer />;
       
+        if(onlineStatus === false)
+        return (
+        <h1>
+            You are OFFLINE, Please check your Internet Connection !!
+        </h1>
+        );
+        
 
     return (
         <div className="body">
